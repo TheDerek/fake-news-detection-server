@@ -9,6 +9,7 @@ name = "pypi"
 
 flask = "*"
 "newspaper3k" = "*"
+tensorflow = "*"
 
 
 [dev-packages]
