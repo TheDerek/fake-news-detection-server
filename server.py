@@ -1,9 +1,18 @@
 from flask import Flask, jsonify
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from newspaper import Article
 
 from . import Predictor
 
 app = Flask(__name__)
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["400 per day", "200 per hour"]
+)
+
+print('Loading the predictor and associated TensorFlow things')
 predictor = Predictor()
 
 

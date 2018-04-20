@@ -10,6 +10,7 @@ name = "pypi"
 flask = "*"
 "newspaper3k" = "*"
 tensorflow = "*"
+flask-limiter = "*"
 
 
 [dev-packages]
