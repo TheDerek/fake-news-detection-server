@@ -7,7 +7,7 @@ app = Flask(__name__)
 predictor = Predictor()
 
 
-@app.route("/get/<path:url>")
+@app.route('/get/<path:url>')
 def get(url):
     app.logger.info('Fetching article with URL: {}'.format(url))
     article = Article(url)
