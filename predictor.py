@@ -20,14 +20,17 @@ class Predictor:
         session_conf = tf.ConfigProto(
             allow_soft_placement=True,
             log_device_placement=False)
-
+	
+        print('Loading vocab....')
         self._vocab_processor = learn.preprocessing.VocabularyProcessor.restore(
             VOCAB_PATH)
         self._session = tf.Session(config=session_conf)
 
+        print('Loading checkpoint...')
         saver = tf.train.import_meta_graph("{}.meta".format(CHECKPOINT_FILE))
         saver.restore(self._session, CHECKPOINT_FILE)
 
+        print('Setting up more things...')
         self._input_x = self._session.graph.get_operation_by_name("input_x").outputs[0]
         self._dropout_keep_prob = self._session.graph.get_operation_by_name(
             "dropout_keep_prob").outputs[0]

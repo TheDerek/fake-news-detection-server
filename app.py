@@ -3,7 +3,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from newspaper import Article
 
-from . import Predictor
+from predictor import Predictor
 
 app = Flask(__name__)
 limiter = Limiter(
@@ -14,7 +14,7 @@ limiter = Limiter(
 
 print('Loading the predictor and associated TensorFlow things')
 predictor = Predictor()
-
+print('Ready to rock and roll')
 
 @app.route('/get/<path:url>')
 def get(url):
@@ -31,3 +31,6 @@ def get(url):
         'is_article': True,
         'category': predictor.predict(document)
     }), 200
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
